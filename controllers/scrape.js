@@ -4,11 +4,12 @@ var cheerio = require("cheerio");
 
 var Post = require("../models/Post.js");
 
-var scrape = express.Router();
+var router = express.Router();
 
-scrape.get("/scrape",function(req,res){
+router.get("/scrape",function(req,res){
+    
     //ajax to get the html page
-        axios.get().then(function(response){
+        axios.get("").then(function(response){
             //load data to $
             var $ = cheerio.load(response.data);
             //grab and save data here
@@ -18,6 +19,7 @@ scrape.get("/scrape",function(req,res){
 
                 results.push();
             });
+            //render to front end
             //save to db
             Post.create(results)
                 .then(function(data){
@@ -33,4 +35,4 @@ scrape.get("/scrape",function(req,res){
         });
 });
 
-module.exports = scrape;
+module.exports = router;
