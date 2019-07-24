@@ -1,8 +1,5 @@
 var express = require("express");
 var mongoose = require("mongoose");
-var axios = require("axios");
-var cheerio = require("cheerio");
-var db = require("./models");
 var exphbs = require("express-handlebars");
 var PORT = process.env.PORT || 3000;
 var app = express();
@@ -14,7 +11,6 @@ app.set("view engine","handlebars");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
-
 app.listen(PORT,function(){
     console.log("App running on "+ PORT);
     
