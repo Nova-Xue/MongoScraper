@@ -5,11 +5,21 @@ var Schema = mongoose.Schema;
 var PostSchema = new Schema ({
     title : {
         type : String,
-        required : true
+        required : true,
+        unique : true
     },
     link : {
         type : String,
-        required : true
+        required : true,
+        unique : true
+    },
+    display : {
+        type : Boolean,
+        default : true
+    },
+    saved : {
+        type : Boolean,
+        default : false
     },
     notes : [{
         type : Schema.Types.ObjectId,

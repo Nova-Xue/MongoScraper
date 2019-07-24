@@ -1,38 +1,49 @@
-var express = require("express");
-var axios = require("axios");
-var cheerio = require("cheerio");
+const express = require("express");
+const axios = require("axios");
+const cheerio = require("cheerio");
+const Post = require("../models/Post.js");
 
-var Post = require("../models/Post.js");
+const router = express.Router();
 
-var router = express.Router();
-
-router.get("/scrape",function(req,res){
+const checkExist = (title,link) => {
+    Post.findOne({ title: title }).then(data => data == null? newPost(title,link) : oldPost(title,link)).catch(err => console.log(err));
+}
+const newPost = (title, link) => {
+    console.log("in new");
     
-    //ajax to get the html page
-        axios.get("").then(function(response){
-            //load data to $
-            var $ = cheerio.load(response.data);
-            //grab and save data here
-            //save to an array
-            var results = [];
-            $().each(function(i,element){
+    Post.create({ title: title, link: link }).then(newPost => {}
+    ).catch(err => console.log(err));
+}
+const oldPost = (title, link) => {
+    console.log("in old");
+    Post.findOneAndUpdate({ title: title }, { $set: { title: title, link: link, display: true } }).then(oldPost => {}
+    ).catch(err => console.log(err));
+}
+router.get("/",(req,res)=>{
+    Post.find({display : true})
+        .populate("notes")
+        .then(posts => {
+            res.render("index",posts);
+        })
+        .catch(err => console.log(err));
+});
+router.get("/scrape", (req, res) => {
 
-                results.push();
-            });
-            //render to front end
-            //save to db
-            Post.create(results)
-                .then(function(data){
-                    console.log(data);
-                    
-                })
-                .catch(function(err){
-                if (err) {
-                    console.log(err);
-                    
-                }
-            });
+    //ajax to get the html page
+    //ny time tech section
+    axios.get("https://www.nytimes.com/section/technology").then((response) => {
+        //load data to $
+        const $ = cheerio.load(response.data);
+        //grab and save data here
+        //save new post update display property of old posts
+        $(".css-ye6x8s").each((i, element) => {
+            let link = $(element).find("a").attr("href");
+            let title = $(element).find("h2").text();
+            checkExist(title,link);
         });
+        
+        res.redirect("/");
+    });
 });
 
 module.exports = router;
