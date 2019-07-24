@@ -23,7 +23,7 @@ router.get("/",(req,res)=>{
     Post.find({display : true})
         .populate("notes")
         .then(posts => {
-            res.render("index",posts);
+            res.render("index",{posts : posts});
         })
         .catch(err => console.log(err));
 });
@@ -37,7 +37,7 @@ router.get("/scrape", (req, res) => {
         //grab and save data here
         //save new post update display property of old posts
         $(".css-ye6x8s").each((i, element) => {
-            let link = $(element).find("a").attr("href");
+            let link = "https://www.nytimes.com" + $(element).find("a").attr("href");
             let title = $(element).find("h2").text();
             checkExist(title,link);
         });
