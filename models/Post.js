@@ -5,12 +5,12 @@ var Schema = mongoose.Schema;
 var PostSchema = new Schema ({
     title : {
         type : String,
-        required : true,
+        required : "required",
         unique : true
     },
     link : {
         type : String,
-        required : true,
+        required : "required",
         unique : true
     },
     display : {
