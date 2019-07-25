@@ -20,10 +20,11 @@ const oldPost = (title, link) => {
     ).catch(err => console.log(err));
 }
 router.get("/",(req,res)=>{
-    Post.find({display : true})
-        .populate("notes")
+    Post.find({display : true}).populate("notes")
         .then(posts => {
             res.render("index",{posts : posts});
+            console.log(posts);
+            
         })
         .catch(err => console.log(err));
 });

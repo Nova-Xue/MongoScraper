@@ -3,8 +3,11 @@
     <div class="h-75 d-block"></div>
     <div class="w-60 h-25 d-block">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
 
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary action" data-value="home">Home</button>
             </div>
             <div class="col-sm-2">
                 <button type="button" class="btn btn-primary action" data-value="scrape">Scrape</button>
@@ -15,7 +18,7 @@
             <div class="col-sm-2">
                 <button type="button" class="btn btn-primary action" data-value="saved">Saved</button>
             </div>
-             <div class="col-sm-3">
+             <div class="col-sm-2">
 
             </div>
         </div>
@@ -24,17 +27,12 @@
 </div>
 <div class="container">
 <div class="row">
-<div class="col-md-8">
-
+<div class="col posts">
 <ul class="list-group">
 {{#each posts}}
 {{>post-block}}
 {{/each}}
 </ul>
-
-</div>
-<div class="col-md-4">
-
 </div>
 </div>
 </div>

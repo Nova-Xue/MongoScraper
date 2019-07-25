@@ -1,0 +1,11 @@
+<form>
+<div class="form-group">
+    <label for="notetitle">Title</label>
+    <input type="text" class="form-control" id="notetitle" placeholder="Enter title of the note" value={{#if notetitle}}{{notetitle}}{{/if}}>
+</div>
+<div class="form-group">
+    <label for="content">Content</label>
+    <input type="text" class="form-control" id="content" placeholder="Enter content of the note" value={{#if content}}{{content}}{{/if}}>
+</div>
+<button type="submit" class="btn btn-primary new-note">Submit</button>
+</form>
