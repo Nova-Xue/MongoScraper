@@ -6,7 +6,6 @@ var NoteSchema = new Schema({
     notetitle : {
         type : String,
         required : true,
-        unique : true
     },
     content : {
         type : String,

@@ -6,24 +6,24 @@ const Post = require("../models/Post.js");
 const router = express.Router();
 
 const checkExist = (title,link) => {
-    Post.findOne({ title: title }).then(data => data == null? newPost(title,link) : oldPost(title,link)).catch(err => console.log(err));
+    Post.findOne({ title: title })
+    .then(data => data == null? newPost(title,link) : oldPost(title,link))
+    .catch(err => console.log(err));
 }
 const newPost = (title, link) => {
-    console.log("in new");
-    
-    Post.create({ title: title, link: link }).then(newPost => {}
-    ).catch(err => console.log(err));
+    Post.create({ title: title, link: link })
+    .then()
+    .catch(err => console.log(err));
 }
 const oldPost = (title, link) => {
-    console.log("in old");
-    Post.findOneAndUpdate({ title: title }, { $set: { title: title, link: link, display: true } }).then(oldPost => {}
-    ).catch(err => console.log(err));
+    Post.findOneAndUpdate({ title: title }, { $set: { title: title, link: link, display: true } })
+    .then()
+    .catch(err => console.log(err));
 }
 router.get("/",(req,res)=>{
     Post.find({display : true}).populate("notes")
         .then(posts => {
             res.render("index",{posts : posts});
-            
         })
         .catch(err => console.log(err));
 });
@@ -42,7 +42,7 @@ router.get("/scrape", (req, res) => {
             checkExist(title,link);
         });
         
-        res.redirect("/");
+        res.status(200).end();
     });
 });
 

@@ -5,13 +5,13 @@ $(function () {
     }
     function getScrape() {
         $.get("/scrape").then(function () {
-            console.log("in scrape");
+            location.reload();
 
         });
     }
     function clear(){
         $.get("/clear").then(function(){
-            console.log("in clear");
+            location.reload();
             
         })
     }

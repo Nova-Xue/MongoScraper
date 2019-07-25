@@ -12,12 +12,12 @@ router.get("/saved",(req,res)=>{
     Post.find({saved : true}).populate("notes")
         .then(posts => {
             res.render("index",{posts : posts});
-            //res.send(posts);
         });
 });
 router.get("/clear",(req,res)=>{
-    Post.update({},{$set : {display : false}})
-        .then(data => res.render("index",{posts : null }))
+
+    Post.updateMany({},{$set : {display : false}})
+        .then(data =>res.status(200).end())
         .catch(err=>console.log(err))
 });
 router.put("/save/:id",(req,res)=>{
@@ -26,7 +26,7 @@ router.put("/save/:id",(req,res)=>{
         .catch(err => console.log(err));
 });
 router.put("/delete/:id",(req,res)=>{
-    Post.findOneAndUpdate({_id : req.params.id},{$set : { display : false}})
+    Post.findOneAndUpdate({_id : req.params.id},{$set : { display : false,saved : false}})
         .then(data => res.status(200).end())
         .catch(err => console.log(err));
 });
