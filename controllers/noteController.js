@@ -6,7 +6,7 @@ router.post("/submit/:id",(req,res)=>{
     Note.create(req.body)
         .then(newNote => {
             Post.findOneAndUpdate({_id : req.params.id},{$push : {notes : newNote._id}},(err,data) => {
-                err? console.log(err) : res.render("index",data);
+                err? console.log(err) : res.redirect("/");
             });
         }).catch(err=>console.log(err));
 });

@@ -69,15 +69,11 @@ $(function () {
     $(".save-post").click(function(){
         saveById($(this).val());
     });
-    $(document).on("click",".list-group-item",function(){
-        console.log(" in click");
-        
-    });
-    $(document).on("click","card",function(){
-        renderForm($(this).attr("data-value"));
-    });
-    $(".new-note").click(function(e){
-        e.prevent
-        
-    });
+    // $(document).on("click","card",function(){
+    //     renderForm($(this).attr("data-value"));
+    // });
+    // $(".new-note").click(function(e){
+    //     e.preventDefault();
+    //     $(this).parent().find("#notetitle")
+    // });
 });
